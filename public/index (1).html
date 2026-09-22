@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in · Ecoast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #12292c;
+    --ink-soft: #3c5a5d;
+    --sand: #f3efe4;
+    --sand-deep: #e7e0cf;
+    --tide: #4c8577;
+    --clay: #b5522c;
+    --line: rgba(18, 41, 44, 0.14);
+    --card: #fffdf8;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--sand);
+    color: var(--ink);
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Left panel — brand side */
+  .brand {
+    flex: 1 1 46%;
+    background: var(--ink);
+    color: var(--sand);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 56px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .brand::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% 110%, rgba(76, 133, 119, 0.35), transparent 60%),
+      radial-gradient(ellipse 700px 400px at 100% -10%, rgba(181, 82, 44, 0.18), transparent 55%);
+    pointer-events: none;
+  }
+
+  .brand-mark {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    z-index: 1;
+  }
+
+  .brand-copy {
+    z-index: 1;
+    max-width: 420px;
+  }
+
+  .brand-copy h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(32px, 4vw, 44px);
+    line-height: 1.15;
+    margin: 0 0 18px;
+  }
+
+  .brand-copy p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(243, 239, 228, 0.72);
+    margin: 0;
+  }
+
+  .tide-line {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: rgba(243, 239, 228, 0.55);
+  }
+
+  .tide-line svg { flex-shrink: 0; }
+
+  /* Right panel — form side */
+  .panel {
+    flex: 1 1 54%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 32px;
+  }
+
+  .form-wrap {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .form-wrap h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 28px;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+
+  .form-wrap .sub {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 0 0 36px;
+  }
+
+  .form-wrap .sub a {
+    color: var(--tide);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .form-wrap .sub a:hover { text-decoration: underline; }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 7px;
+  }
+
+  .field { margin-bottom: 20px; }
+
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 13px 14px;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--ink);
+    background: var(--card);
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  input::placeholder { color: #9aa8a0; }
+
+  input:focus {
+    border-color: var(--tide);
+    box-shadow: 0 0 0 3px rgba(76, 133, 119, 0.15);
+  }
+
+  .row-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: -6px 0 26px;
+  }
+
+  .remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+
+  .remember input {
+    width: 15px;
+    height: 15px;
+    accent-color: var(--tide);
+  }
+
+  .forgot {
+    font-size: 13.5px;
+    color: var(--tide);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .forgot:hover { text-decoration: underline; }
+
+  button.submit {
+    width: 100%;
+    padding: 14px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--sand);
+    background: var(--ink);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.05s ease;
+  }
+
+  button.submit:hover { background: #1c3a3e; }
+  button.submit:active { transform: translateY(1px); }
+
+  .error {
+    display: none;
+    background: rgba(181, 82, 44, 0.09);
+    border: 1px solid rgba(181, 82, 44, 0.35);
+    color: var(--clay);
+    font-size: 13.5px;
+    padding: 11px 14px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .error.show { display: block; }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 28px 0 22px;
+    color: #a4ada7;
+    font-size: 12.5px;
+  }
+
+  .divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .new-account {
+    text-align: center;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-top: 26px;
+  }
+
+  .new-account a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--tide);
+  }
+
+  @media (max-width: 860px) {
+    .brand { display: none; }
+    .panel { flex: 1 1 100%; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="brand">
+    <div class="brand-mark">Ecoast</div>
+    <div class="brand-copy">
+      <h1>Welcome back to the coast.</h1>
+      <p>Sign in to pick up where you left off — your trips, notes, and saved places are all here waiting.</p>
+    </div>
+    <div class="tide-line">
+      <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+        <path d="M1 6C2.5 3.5 4.5 3.5 6 6C7.5 8.5 9.5 8.5 11 6C12.5 3.5 14.5 3.5 16 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      yexileasuncionecoast
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="form-wrap">
+      <h2>Sign in</h2>
+      <p class="sub">New here? <a href="#" id="switchToSignup">Create an account</a></p>
+
+      <div class="error" id="errorBox">That email and password combination didn't work. Try again.</div>
+
+      <form id="loginForm">
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+
+        <div class="row-between">
+          <label class="remember">
+            <input type="checkbox" id="remember" name="remember">
+            Keep me signed in
+          </label>
+          <a href="#" class="forgot">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="submit">Sign in</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Placeholder auth handling — wire this up to your real backend/API later.
+    const form = document.getElementById('loginForm');
+    const errorBox = document.getElementById('errorBox');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      errorBox.classList.remove('show');
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!email || !password) {
+        errorBox.textContent = "Enter both an email and a password.";
+        errorBox.classList.add('show');
+        return;
+      }
+
+      // TODO: replace with a real request once you have an auth backend, e.g.:
+      // const res = await fetch('/api/login', { method: 'POST', body: JSON.stringify({ email, password }) });
+      console.log('Login submitted for', email);
+      errorBox.textContent = "No backend connected yet — this form is a placeholder.";
+      errorBox.classList.add('show');
+    });
+  </script>
+
+</body>
+</html>
